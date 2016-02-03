@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileViewController: UITableViewController, UITableViewDelegate, UINavigationControllerDelegate {
+class ProfileViewController: UITableViewController, UINavigationControllerDelegate {
     
     // UI Outlets
     @IBOutlet var profileTableView: UITableView!
@@ -54,16 +54,10 @@ class ProfileViewController: UITableViewController, UITableViewDelegate, UINavig
     @IBAction func backpressed() {
         self.navigationController?.popViewControllerAnimated(true)
     }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "profileToDesignIdea" {
-            let destinationVC = segue.destinationViewController as! DesignIdeasTableViewController
-        }
-    }
         
     func createPopAlert() {
         var popover:UIPopoverController?
-        var title = "Before you sign out, do you have any suggestions to make NatureNet better?"
+        let title = "Before you sign out, do you have any suggestions to make NatureNet better?"
         var alert:UIAlertController = UIAlertController(title: title, message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
         
         var singoutAction = UIAlertAction(title: "Sign me out", style: UIAlertActionStyle.Destructive) {

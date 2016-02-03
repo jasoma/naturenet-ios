@@ -47,11 +47,6 @@ class Context: NNModel {
     // update data in core data
     override func updateToCoreData(data: NSDictionary) {
         let managedContext: NSManagedObjectContext = SwiftCoreDataHelper.nsManagedObjectContext
-
-//        var contexts = SwiftCoreDataHelper.fetchEntities(NSStringFromClass(Context), withPredicate: nil, managedObjectContext: managedContext) as! [Context]
-//        for context in contexts {
-//            managedContext.deleteObject(context)
-//        }
         
         self.setValue(data["id"] as! Int, forKey: "uid")
         self.setValue(data["name"] as! String, forKey: "name")
@@ -81,14 +76,14 @@ class Context: NNModel {
             return nil
         }
         
-        var extras = self.extras
+        let extras = self.extras
         // because entry "Other" has no extras, no description
         if !extras.isEmpty {
             var coordinate = extras.componentsSeparatedByString(",") as [String]
             var latCoordinate = coordinate[0].componentsSeparatedByString(":") as [String]
             var lonCoordinate = coordinate[1].componentsSeparatedByString(":") as [String]
-            var latNumber = (latCoordinate[1] as NSString).doubleValue
-            var lonNumber = (lonCoordinate[1] as NSString).doubleValue
+            let latNumber = (latCoordinate[1] as NSString).doubleValue
+            let lonNumber = (lonCoordinate[1] as NSString).doubleValue
 //            location = CLLocationCoordinate2DMake(latNumber, lonNumber)
             location = CLLocation(latitude: latNumber, longitude: lonNumber)
         }

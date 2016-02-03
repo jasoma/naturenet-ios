@@ -38,7 +38,7 @@ class NNModel: NSManagedObject {
     }
     
     // pull information from coredata
-    // ** Deprecated ** //
+    @available(*, deprecated=1.1.0)
     class func doPullByNameFromCoreData(entityname: String, attr: String, name: String?) -> NNModel? {
         var model: NNModel?
         let context: NSManagedObjectContext = SwiftCoreDataHelper.nsManagedObjectContext
@@ -47,37 +47,39 @@ class NNModel: NSManagedObject {
         if name != nil {
             request.predicate = NSPredicate(format: "\(attr) = %@", name!)
         }
-        var results: NSArray = context.executeFetchRequest(request, error: nil)!
-        if results.count > 0 {
+        
+        if let results = try? context.executeFetchRequest(request) where results.count > 0 {
             for res in results {
                 if let tModel = res as? NNModel {
                     model = tModel
                 }
             }
         } else {
-            println("no matched in doPullByNameFromCoreData")
+            print("no matched in doPullByNameFromCoreData")
         }
+        
         return model
     }
     
     // pull information from coredata
-    // ** Deprecated **
+    @available(*, deprecated=1.1.0)
     class func doPullByUIDFromCoreData(entityname: String, uid: Int) -> NNModel? {
         var model: NNModel?
         let context: NSManagedObjectContext = SwiftCoreDataHelper.nsManagedObjectContext
         let request = NSFetchRequest(entityName: entityname)
         request.returnsDistinctResults = false
         request.predicate = NSPredicate(format: "uid = \(uid)")
-        var results: NSArray = context.executeFetchRequest(request, error: nil)!
-        if results.count > 0 {
+        
+        if let results = try? context.executeFetchRequest(request) where results.count > 0 {
             for res in results {
                 if let tModel = res as? NNModel {
                     model = tModel
                 }
             }
         } else {
-            println("no matched in doPullByUIDFromCoreData")
+            print("no matched in doPullByUIDFromCoreData")
         }
+        
         return model
     }
     
@@ -87,16 +89,17 @@ class NNModel: NSManagedObject {
         let request = NSFetchRequest(entityName: entityname)
         request.returnsDistinctResults = false
         request.predicate = predicate
-        var results: NSArray = context.executeFetchRequest(request, error: nil)!
-        if results.count > 0 {
+        
+        if let results = try? context.executeFetchRequest(request) where results.count > 0 {
             for res in results {
                 if let tModel = res as? NNModel {
                     model = tModel
                 }
             }
         } else {
-            println("no matched entity in fetechEntitySingle")
+            print("no matched in fetechEntitySingle")
         }
+        
         return model
     }
     
