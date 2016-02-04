@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1605" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="4dx-qS-qFF">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="4dx-qS-qFF">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -275,7 +275,7 @@
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="designIdeaListCell" textLabel="Iul-ym-7Ev" imageView="hfq-FD-MS0" style="IBUITableViewCellStyleDefault" id="ltQ-mL-HJi">
-                                <rect key="frame" x="0.0" y="114" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="113.5" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ltQ-mL-HJi" id="UDG-D3-wbW">
                                     <rect key="frame" x="0.0" y="0.0" width="533" height="43.5"/>
@@ -461,7 +461,7 @@
         <!--Sign In-->
         <scene sceneID="85P-qF-8A2">
             <objects>
-                <viewController id="PsJ-bN-In7" customClass="SignInViewController" customModule="NatureNet" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignIn" id="PsJ-bN-In7" customClass="SignInViewController" customModule="NatureNet" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="nuS-QR-2De"/>
                         <viewControllerLayoutGuide type="bottom" id="bZL-O3-J9F"/>
@@ -485,10 +485,10 @@
                                 <color key="separatorColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="loginFormCell" id="FxB-TR-ba6">
-                                        <rect key="frame" x="0.0" y="50" width="558" height="40"/>
+                                        <rect key="frame" x="0.0" y="49.5" width="558" height="40"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FxB-TR-ba6" id="jLd-Gm-Gbw">
-                                            <rect key="frame" x="0.0" y="0.0" width="558" height="40"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="558" height="39.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -608,10 +608,10 @@ The researchers and other visitors will be able to look at your contributions an
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="consentCell" id="ZtO-5h-iyL">
-                                <rect key="frame" x="0.0" y="114" width="600" height="100"/>
+                                <rect key="frame" x="0.0" y="113.5" width="600" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZtO-5h-iyL" id="fQV-Py-Jq4">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="100"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="99.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -960,7 +960,7 @@ The researchers and other visitors will be able to look at your contributions an
                                         <rect key="frame" x="0.0" y="99" width="600" height="255"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LyZ-HL-DYd" id="5sH-iR-KKo">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="255"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="254.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="c30-VZ-Zvu">
@@ -1350,7 +1350,7 @@ NatureNet is funded by the National Science Foundation (IIS-1221513) in a grant 
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="activitiesCell" textLabel="QAM-pK-Awg" imageView="giK-3T-WHu" style="IBUITableViewCellStyleDefault" id="D1z-og-JOM">
-                                <rect key="frame" x="0.0" y="114" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="113.5" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="D1z-og-JOM" id="Rb9-eV-2Cf">
                                     <rect key="frame" x="0.0" y="0.0" width="533" height="43.5"/>
@@ -1415,7 +1415,7 @@ NatureNet is funded by the National Science Foundation (IIS-1221513) in a grant 
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="birdActivityDescriptionCell" rowHeight="50" id="oiA-rN-6ow">
-                                <rect key="frame" x="0.0" y="114" width="600" height="50"/>
+                                <rect key="frame" x="0.0" y="113.5" width="600" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oiA-rN-6ow" id="v3R-wY-HWV">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
@@ -1435,7 +1435,7 @@ NatureNet is funded by the National Science Foundation (IIS-1221513) in a grant 
                                 </tableViewCellContentView>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="birdActivitySendCell" id="9Ge-Bd-vH4">
-                                <rect key="frame" x="0.0" y="164" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="163.5" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9Ge-Bd-vH4" id="kr2-Gt-5Gc">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
@@ -1455,7 +1455,7 @@ NatureNet is funded by the National Science Foundation (IIS-1221513) in a grant 
                                 </tableViewCellContentView>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="BirdActivityRegularCell" textLabel="om1-8m-bHz" detailTextLabel="CNt-Fz-HyS" style="IBUITableViewCellStyleValue1" id="hMA-g4-Y4e">
-                                <rect key="frame" x="0.0" y="208" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="207.5" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hMA-g4-Y4e" id="ZPC-cv-qqf">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>

@@ -35,7 +35,8 @@ class SwiftCoreDataHelper {
         do {
             try managedObjectContext.save()
             return true
-        } catch _ {
+        } catch {
+            print("Error saving a managed object: \(error)")
             return false
         }
     }

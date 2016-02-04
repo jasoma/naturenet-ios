@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		965C31351C63193A00CA21D0 /* AccountSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965C31311C63170F00CA21D0 /* AccountSpec.swift */; };
+		96EBD4331C62E6F400BA3737 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96EBD4301C62E6F400BA3737 /* Nimble.framework */; };
+		96EBD4351C62E6F400BA3737 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96EBD4311C62E6F400BA3737 /* Quick.framework */; };
+		96EBD4371C62E98900BA3737 /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 96EBD4301C62E6F400BA3737 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		96EBD4381C62E98900BA3737 /* Quick.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 96EBD4311C62E6F400BA3737 /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		96EBD43B1C62E99F00BA3737 /* SignInControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EBD4391C62E99F00BA3737 /* SignInControllerSpec.swift */; };
 		FC012CC01A769E3F00D9CBF1 /* Site.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC012CBF1A769E3F00D9CBF1 /* Site.swift */; };
 		FC012CC21A76AD9800D9CBF1 /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC012CC11A76AD9800D9CBF1 /* Context.swift */; };
 		FC031E581A833E71007F67D7 /* NoteLocationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC031E571A833E71007F67D7 /* NoteLocationTableViewController.swift */; };
@@ -14,7 +20,6 @@
 		FC1134961A642DD500D548E8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1134951A642DD500D548E8 /* AppDelegate.swift */; };
 		FC1134991A642DD500D548E8 /* naturenet.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FC1134971A642DD500D548E8 /* naturenet.xcdatamodeld */; };
 		FC1134A31A642DD600D548E8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC1134A11A642DD600D548E8 /* LaunchScreen.xib */; };
-		FC1134AF1A642DD600D548E8 /* naturenetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1134AE1A642DD600D548E8 /* naturenetTests.swift */; };
 		FC1134B91A642FAE00D548E8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC1134B81A642FAE00D548E8 /* Main.storyboard */; };
 		FC1134BB1A642FDC00D548E8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC1134BA1A642FDC00D548E8 /* Images.xcassets */; };
 		FC1134BD1A64308D00D548E8 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1134BC1A64308C00D548E8 /* SignInViewController.swift */; };
@@ -74,7 +79,25 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		96EBD4361C62E97700BA3737 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				96EBD4371C62E98900BA3737 /* Nimble.framework in CopyFiles */,
+				96EBD4381C62E98900BA3737 /* Quick.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		965C31311C63170F00CA21D0 /* AccountSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountSpec.swift; sourceTree = "<group>"; };
+		96EBD4301C62E6F400BA3737 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = SOURCE_ROOT; };
+		96EBD4311C62E6F400BA3737 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = SOURCE_ROOT; };
+		96EBD4391C62E99F00BA3737 /* SignInControllerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInControllerSpec.swift; sourceTree = "<group>"; };
 		FC012CBF1A769E3F00D9CBF1 /* Site.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Site.swift; sourceTree = "<group>"; };
 		FC012CC11A76AD9800D9CBF1 /* Context.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Context.swift; sourceTree = "<group>"; };
 		FC031E571A833E71007F67D7 /* NoteLocationTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteLocationTableViewController.swift; sourceTree = "<group>"; };
@@ -86,7 +109,6 @@
 		FC1134A21A642DD600D548E8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		FC1134A81A642DD600D548E8 /* NatureNetTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NatureNetTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC1134AD1A642DD600D548E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FC1134AE1A642DD600D548E8 /* naturenetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = naturenetTests.swift; sourceTree = "<group>"; };
 		FC1134B81A642FAE00D548E8 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = ../Main.storyboard; sourceTree = "<group>"; };
 		FC1134BA1A642FDC00D548E8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		FC1134BC1A64308C00D548E8 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -159,19 +181,54 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96EBD4351C62E6F400BA3737 /* Quick.framework in Frameworks */,
+				96EBD4331C62E6F400BA3737 /* Nimble.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		FC1134871A642DD500D548E8 = {
+		965C31331C63171400CA21D0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				965C31311C63170F00CA21D0 /* AccountSpec.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		965C31341C63171F00CA21D0 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				96EBD4391C62E99F00BA3737 /* SignInControllerSpec.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		96EBD42E1C62E6DB00BA3737 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				96EBD4301C62E6F400BA3737 /* Nimble.framework */,
+				96EBD4311C62E6F400BA3737 /* Quick.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		96EBD42F1C62E6E100BA3737 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				FCEC98591A9ACC28007C4ED5 /* MapKit.framework */,
 				FCD317EE1A892476003FC954 /* libCloudinary.a */,
 				FCD317D91A887473003FC954 /* CoreLocation.framework */,
 				FC1134CD1A64317F00D548E8 /* CoreData.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FC1134871A642DD500D548E8 = {
+			isa = PBXGroup;
+			children = (
+				96EBD42F1C62E6E100BA3737 /* Frameworks */,
 				FC1134921A642DD500D548E8 /* naturenet */,
 				FC1134AB1A642DD600D548E8 /* naturenetTests */,
 				FC1134911A642DD500D548E8 /* Products */,
@@ -215,8 +272,10 @@
 		FC1134AB1A642DD600D548E8 /* naturenetTests */ = {
 			isa = PBXGroup;
 			children = (
-				FC1134AE1A642DD600D548E8 /* naturenetTests.swift */,
 				FC1134AC1A642DD600D548E8 /* Supporting Files */,
+				96EBD42E1C62E6DB00BA3737 /* Frameworks */,
+				965C31341C63171F00CA21D0 /* Controllers */,
+				965C31331C63171400CA21D0 /* Model */,
 			);
 			path = naturenetTests;
 			sourceTree = "<group>";
@@ -344,6 +403,7 @@
 				FC1134A41A642DD600D548E8 /* Sources */,
 				FC1134A51A642DD600D548E8 /* Frameworks */,
 				FC1134A61A642DD600D548E8 /* Resources */,
+				96EBD4361C62E97700BA3737 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -474,7 +534,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC1134AF1A642DD600D548E8 /* naturenetTests.swift in Sources */,
+				965C31351C63193A00CA21D0 /* AccountSpec.swift in Sources */,
+				96EBD43B1C62E99F00BA3737 /* SignInControllerSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -586,6 +647,11 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = naturenet/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -607,6 +673,11 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = naturenet/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -627,6 +698,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -646,6 +718,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = naturenetTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

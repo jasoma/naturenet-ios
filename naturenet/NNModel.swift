@@ -9,6 +9,13 @@
 import Foundation
 import CoreData
 
+/// Collection of errors that can occur when dealing with models locally
+/// or with response from the server.
+enum ModelErrors: ErrorType {
+    /// Not enough data is present to create a model instance.
+    case IncompleteData(data: NSDictionary)
+}
+
 class NNModel: NSManagedObject {
     @NSManaged var uid: NSNumber
     @NSManaged var created_at: NSNumber

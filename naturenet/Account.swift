@@ -24,33 +24,58 @@ class Account: NNModel {
         parseService.getResponse(NSStringFromClass(Account), url: accountUrl)
     }
     
-    func parseJSON(data: NSDictionary) -> Account {
-        self.uid = data["id"] as! Int
-        self.username = data["username"] as! String
-        self.name = data["name"] as! String
-        self.password = data["password"] as! String
-        self.email = data["email"] as! String
-        self.created_at = data["created_at"] as! NSNumber
-        self.modified_at = data["modified_at"] as! NSNumber
-        return self
+    /// Updates this account instance with values from a dictionary, it is expected that the
+    /// keys in the dictionary have the same names as the properties of the class with the
+    /// exception that `Account#uid` is read from the value of the key `id`.
+    ///
+    /// - parameter data: the dictionary to read values from.
+    /// - returns: the created account or nil if the dictionary contains incomplete data or
+    ///            a values type does not match.
+    func updateWithData(data: NSDictionary) throws {
+        if let
+            uid = data["id"] as? Int,
+            username = data["username"] as? String {
+                self.uid = uid
+                self.username = username
+
+                // TODO: remove this if https://github.com/naturenet/naturenet-api/pull/3 is accepted
+                if let
+                    name = data["name"] as? String,
+                    created_at = data["created_at"] as? NSNumber,
+                    modified_at = data["modified_at"] as?   NSNumber {
+                        self.name = name
+                        self.created_at = created_at
+                        self.modified_at = modified_at
+                    }
+        } else {
+            throw ModelErrors.IncompleteData(data: data)
+        }
     }
     
     // update data in core data
     override func updateToCoreData(data: NSDictionary) {
-        self.setValue(data["password"] as! String, forKey: "password")
-        self.setValue(data["email"] as! String, forKey: "email")
-        self.setValue(data["modified_at"] as! NSNumber, forKey: "modified_at")
-        SwiftCoreDataHelper.saveManagedObjectContext(self.nsManagedContext)
+        do {
+            try updateWithData(data)
+            SwiftCoreDataHelper.saveManagedObjectContext(self.nsManagedContext)
+        } catch {
+            // TODO: it would be nicer to let the error propagate so the controller can present something to
+            //       the user, requires modifying the base class.
+            print("Update failed: \(error)")
+        }
     }
     
     // save a new account in core data
-    class func saveToCoreData(mAccount: NSDictionary) -> Account {
+    class func saveToCoreData(mAccount: NSDictionary) -> Account? {
         let context: NSManagedObjectContext = SwiftCoreDataHelper.nsManagedObjectContext
         let account =  SwiftCoreDataHelper.insertManagedObject(NSStringFromClass(Account), managedObjectConect: context) as! Account
-        account.parseJSON(mAccount)
-        print("account with \(account.uid) is: { \(account.toString()) } is saved")
-        account.commit()
-        return account
+        do {
+            try account.updateWithData(mAccount)
+            account.commit()
+            return account
+        } catch {
+            print("Failed to save an account: \(error)")
+            return nil
+        }
     }
     
     // push a new user to remote server as HTTP post

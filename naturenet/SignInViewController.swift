@@ -221,34 +221,24 @@ class SignInViewController: UIViewController, APIControllerProtocol, UITextField
     // parse account info and save
     func handleUserData(data: NSDictionary) {
         let username = data["username"] as! String
-        let pass = data["password"] as! String
-        let modified_at = data["modified_at"] as! NSNumber
-        
-        if pass != self.textFieldUpass.text {
-            let errorMessage = "Password is Wrong"
-            self.showFailMessage(errorMessage)
-            self.pauseIndicator()
-            return
-        }
-        
         let predicate = NSPredicate(format: "username = %@", username)
-        let existingAccount = NNModel.fetechEntitySingle(NSStringFromClass(Account), predicate: predicate) as? Account
-        if existingAccount != nil {
-            // println("input user existing in core date: \(existingAccount?.toString())")
-            // println("You have this user in core data: \(inputUser)")
-            let existingModifiedAt = existingAccount!.modified_at
-            if existingModifiedAt != modified_at {
-                // usually user only is alllowed to change pass, email
-                existingAccount!.updateToCoreData(data)
-                existingAccount!.commit()
-            }
+        
+        if let existingAccount = NNModel.fetechEntitySingle(NSStringFromClass(Account), predicate: predicate) as? Account {
+            existingAccount.updateToCoreData(data)
+            existingAccount.commit()
             self.account = existingAccount
         } else {
-            // println("You don't have this user in core data: \(username)")
             self.account = Account.saveToCoreData(data)
         }
-        Session.signIn(self.account!, site: self.site!)
-        self.account!.pullnotes(parseService)
+
+        // the account update/save operation might fail
+        if let account = self.account {
+            Session.signIn(account, site: self.site!)
+            account.pullnotes(parseService)
+        } else {
+            self.showFailMessage("There was an error signing in to your account")
+            self.pauseIndicator()
+        }
     }
     
     // parse site info and save
