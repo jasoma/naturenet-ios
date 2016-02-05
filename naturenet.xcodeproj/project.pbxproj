@@ -8,11 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		965C31351C63193A00CA21D0 /* AccountSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965C31311C63170F00CA21D0 /* AccountSpec.swift */; };
+		96E359901C644BA700580157 /* UserSignInSignOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E3598F1C644BA700580157 /* UserSignInSignOut.swift */; };
+		96E359971C644C3700580157 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96EBD4301C62E6F400BA3737 /* Nimble.framework */; };
+		96E359981C644C3700580157 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96EBD4311C62E6F400BA3737 /* Quick.framework */; };
+		96E3599A1C644C5900580157 /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 96EBD4301C62E6F400BA3737 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		96E3599B1C644C5E00580157 /* Quick.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 96EBD4311C62E6F400BA3737 /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		96EBD4331C62E6F400BA3737 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96EBD4301C62E6F400BA3737 /* Nimble.framework */; };
 		96EBD4351C62E6F400BA3737 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96EBD4311C62E6F400BA3737 /* Quick.framework */; };
 		96EBD4371C62E98900BA3737 /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 96EBD4301C62E6F400BA3737 /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		96EBD4381C62E98900BA3737 /* Quick.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 96EBD4311C62E6F400BA3737 /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		96EBD43B1C62E99F00BA3737 /* SignInControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EBD4391C62E99F00BA3737 /* SignInControllerSpec.swift */; };
 		FC012CC01A769E3F00D9CBF1 /* Site.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC012CBF1A769E3F00D9CBF1 /* Site.swift */; };
 		FC012CC21A76AD9800D9CBF1 /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC012CC11A76AD9800D9CBF1 /* Context.swift */; };
 		FC031E581A833E71007F67D7 /* NoteLocationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC031E571A833E71007F67D7 /* NoteLocationTableViewController.swift */; };
@@ -70,6 +74,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		96E359921C644BA700580157 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FC1134881A642DD500D548E8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FC11348F1A642DD500D548E8;
+			remoteInfo = NatureNet;
+		};
 		FC1134A91A642DD600D548E8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FC1134881A642DD500D548E8 /* Project object */;
@@ -80,6 +91,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		96E359991C644C4700580157 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				96E3599B1C644C5E00580157 /* Quick.framework in CopyFiles */,
+				96E3599A1C644C5900580157 /* Nimble.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		96EBD4361C62E97700BA3737 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -95,9 +117,11 @@
 
 /* Begin PBXFileReference section */
 		965C31311C63170F00CA21D0 /* AccountSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountSpec.swift; sourceTree = "<group>"; };
+		96E3598D1C644BA700580157 /* NatureNetUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NatureNetUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		96E3598F1C644BA700580157 /* UserSignInSignOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSignInSignOut.swift; sourceTree = "<group>"; };
+		96E359911C644BA700580157 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		96EBD4301C62E6F400BA3737 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = SOURCE_ROOT; };
 		96EBD4311C62E6F400BA3737 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = SOURCE_ROOT; };
-		96EBD4391C62E99F00BA3737 /* SignInControllerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInControllerSpec.swift; sourceTree = "<group>"; };
 		FC012CBF1A769E3F00D9CBF1 /* Site.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Site.swift; sourceTree = "<group>"; };
 		FC012CC11A76AD9800D9CBF1 /* Context.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Context.swift; sourceTree = "<group>"; };
 		FC031E571A833E71007F67D7 /* NoteLocationTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteLocationTableViewController.swift; sourceTree = "<group>"; };
@@ -166,6 +190,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		96E3598A1C644BA700580157 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				96E359971C644C3700580157 /* Nimble.framework in Frameworks */,
+				96E359981C644C3700580157 /* Quick.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FC11348D1A642DD500D548E8 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -189,20 +222,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		965C31331C63171400CA21D0 /* Model */ = {
+		965C31361C64421400CA21D0 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				965C31311C63170F00CA21D0 /* AccountSpec.swift */,
 			);
-			name = Model;
+			name = Shared;
+			path = naturenetTests;
 			sourceTree = "<group>";
 		};
-		965C31341C63171F00CA21D0 /* Controllers */ = {
+		96E3598E1C644BA700580157 /* NatureNetUITests */ = {
 			isa = PBXGroup;
 			children = (
-				96EBD4391C62E99F00BA3737 /* SignInControllerSpec.swift */,
+				96E3598F1C644BA700580157 /* UserSignInSignOut.swift */,
+				96E359911C644BA700580157 /* Info.plist */,
 			);
-			name = Controllers;
+			path = NatureNetUITests;
+			sourceTree = "<group>";
+		};
+		96E3599C1C644E5800580157 /* Testing */ = {
+			isa = PBXGroup;
+			children = (
+				965C31361C64421400CA21D0 /* Shared */,
+				96EBD42E1C62E6DB00BA3737 /* Frameworks */,
+				96E3598E1C644BA700580157 /* NatureNetUITests */,
+				FC1134AB1A642DD600D548E8 /* NaturenetTests */,
+			);
+			name = Testing;
 			sourceTree = "<group>";
 		};
 		96EBD42E1C62E6DB00BA3737 /* Frameworks */ = {
@@ -212,6 +257,7 @@
 				96EBD4311C62E6F400BA3737 /* Quick.framework */,
 			);
 			name = Frameworks;
+			path = naturenetTests;
 			sourceTree = "<group>";
 		};
 		96EBD42F1C62E6E100BA3737 /* Frameworks */ = {
@@ -229,8 +275,8 @@
 			isa = PBXGroup;
 			children = (
 				96EBD42F1C62E6E100BA3737 /* Frameworks */,
-				FC1134921A642DD500D548E8 /* naturenet */,
-				FC1134AB1A642DD600D548E8 /* naturenetTests */,
+				FC1134921A642DD500D548E8 /* Naturenet */,
+				96E3599C1C644E5800580157 /* Testing */,
 				FC1134911A642DD500D548E8 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -240,17 +286,18 @@
 			children = (
 				FC1134901A642DD500D548E8 /* NatureNet.app */,
 				FC1134A81A642DD600D548E8 /* NatureNetTests.xctest */,
+				96E3598D1C644BA700580157 /* NatureNetUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		FC1134921A642DD500D548E8 /* naturenet */ = {
+		FC1134921A642DD500D548E8 /* Naturenet */ = {
 			isa = PBXGroup;
 			children = (
 				FCD317F01A8924E6003FC954 /* Cloudinary */,
 				FC5BA3851A7811200069D59F /* Helper */,
-				FC1134D31A643CCC00D548E8 /* dataModel */,
-				FC1134CC1A64314300D548E8 /* controllers */,
+				FC1134D31A643CCC00D548E8 /* DataModel */,
+				FC1134CC1A64314300D548E8 /* Controllers */,
 				FC1134951A642DD500D548E8 /* AppDelegate.swift */,
 				FC1134BA1A642FDC00D548E8 /* Images.xcassets */,
 				FC1134B81A642FAE00D548E8 /* Main.storyboard */,
@@ -258,6 +305,7 @@
 				FC1134A11A642DD600D548E8 /* LaunchScreen.xib */,
 				FC1134931A642DD500D548E8 /* Supporting Files */,
 			);
+			name = Naturenet;
 			path = naturenet;
 			sourceTree = "<group>";
 		};
@@ -269,14 +317,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		FC1134AB1A642DD600D548E8 /* naturenetTests */ = {
+		FC1134AB1A642DD600D548E8 /* NaturenetTests */ = {
 			isa = PBXGroup;
 			children = (
 				FC1134AC1A642DD600D548E8 /* Supporting Files */,
-				96EBD42E1C62E6DB00BA3737 /* Frameworks */,
-				965C31341C63171F00CA21D0 /* Controllers */,
-				965C31331C63171400CA21D0 /* Model */,
+				965C31311C63170F00CA21D0 /* AccountSpec.swift */,
 			);
+			name = NaturenetTests;
 			path = naturenetTests;
 			sourceTree = "<group>";
 		};
@@ -288,7 +335,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		FC1134CC1A64314300D548E8 /* controllers */ = {
+		FC1134CC1A64314300D548E8 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				FCA005431A82888C0066686D /* cells */,
@@ -311,10 +358,10 @@
 				FCB1D51F1A95B9F3006267E9 /* SignUpViewController.swift */,
 				FCEC985B1A9ACD57007C4ED5 /* TourViewController.swift */,
 			);
-			name = controllers;
+			name = Controllers;
 			sourceTree = "<group>";
 		};
-		FC1134D31A643CCC00D548E8 /* dataModel */ = {
+		FC1134D31A643CCC00D548E8 /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
 				FC1134C21A6430D900D548E8 /* NNModel.swift */,
@@ -326,7 +373,7 @@
 				FC5BA3881A7859400069D59F /* Media.swift */,
 				FCA005481A832B010066686D /* Feedback.swift */,
 			);
-			name = dataModel;
+			name = DataModel;
 			sourceTree = "<group>";
 		};
 		FC5BA3851A7811200069D59F /* Helper */ = {
@@ -379,6 +426,25 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		96E3598C1C644BA700580157 /* NatureNetUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 96E359961C644BA700580157 /* Build configuration list for PBXNativeTarget "NatureNetUITests" */;
+			buildPhases = (
+				96E359891C644BA700580157 /* Sources */,
+				96E3598A1C644BA700580157 /* Frameworks */,
+				96E3598B1C644BA700580157 /* Resources */,
+				96E359991C644C4700580157 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				96E359931C644BA700580157 /* PBXTargetDependency */,
+			);
+			name = NatureNetUITests;
+			productName = NatureNetUITests;
+			productReference = 96E3598D1C644BA700580157 /* NatureNetUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		FC11348F1A642DD500D548E8 /* NatureNet */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = FC1134B21A642DD600D548E8 /* Build configuration list for PBXNativeTarget "NatureNet" */;
@@ -422,10 +488,14 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftMigration = 0710;
-				LastSwiftUpdateCheck = 0710;
+				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Jinyue Xia";
 				TargetAttributes = {
+					96E3598C1C644BA700580157 = {
+						CreatedOnToolsVersion = 7.2;
+						TestTargetID = FC11348F1A642DD500D548E8;
+					};
 					FC11348F1A642DD500D548E8 = {
 						CreatedOnToolsVersion = 6.1.1;
 						DevelopmentTeam = WN3YQ2PUY2;
@@ -451,11 +521,19 @@
 			targets = (
 				FC11348F1A642DD500D548E8 /* NatureNet */,
 				FC1134A71A642DD600D548E8 /* NatureNetTests */,
+				96E3598C1C644BA700580157 /* NatureNetUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		96E3598B1C644BA700580157 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FC11348E1A642DD500D548E8 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -480,6 +558,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		96E359891C644BA700580157 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				96E359901C644BA700580157 /* UserSignInSignOut.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FC11348C1A642DD500D548E8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -535,13 +621,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				965C31351C63193A00CA21D0 /* AccountSpec.swift in Sources */,
-				96EBD43B1C62E99F00BA3737 /* SignInControllerSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		96E359931C644BA700580157 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FC11348F1A642DD500D548E8 /* NatureNet */;
+			targetProxy = 96E359921C644BA700580157 /* PBXContainerItemProxy */;
+		};
 		FC1134AA1A642DD600D548E8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = FC11348F1A642DD500D548E8 /* NatureNet */;
@@ -561,6 +651,46 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		96E359941C644BA700580157 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = NatureNetUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.ios.jx.NatureNetUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = NatureNet;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		96E359951C644BA700580157 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = NatureNetUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.ios.jx.NatureNetUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = NatureNet;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
 		FC1134B01A642DD600D548E8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -730,6 +860,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		96E359961C644BA700580157 /* Build configuration list for PBXNativeTarget "NatureNetUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				96E359941C644BA700580157 /* Debug */,
+				96E359951C644BA700580157 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		FC11348B1A642DD500D548E8 /* Build configuration list for PBXProject "NatureNet" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
