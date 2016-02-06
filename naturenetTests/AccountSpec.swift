@@ -50,20 +50,6 @@ class AccountSpec: QuickSpec {
                     fail("could not load the account")
                 }
             }
-
-            // TODO: remove this if https://github.com/naturenet/naturenet-api/pull/3 is accepted
-            it("should tolerate missing name and timestamps") {
-                var incomplete = data
-                incomplete.removeValueForKey("name")
-                incomplete.removeValueForKey("modified_at")
-                incomplete.removeValueForKey("created_at")
-
-                if let account = NNModel.fetechEntitySingle(NSStringFromClass(Account), predicate: NSPredicate(format: "username = %@", data["username"]!)) as? Account {
-                    expect { try account.updateWithData(incomplete) }.toNot(throwError())
-                } else {
-                    fail("could not load the account")
-                }
-            }
         }
     }
 }

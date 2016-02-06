@@ -8,6 +8,8 @@
 
 import Foundation
 import CoreData
+import Alamofire
+import SwiftyJSON
 
 @objc(Account)
 class Account: NNModel {
@@ -124,17 +126,15 @@ class Account: NNModel {
         return mNote
     }
     
-    // toString, debug use
-    func toString() -> String {
-        let string = "username: \(username) pass: \(password) uid: \(uid)  modified: \(modified_at) username: \(username) state: \(state)"
-        return string
-    }
-    
     // pull this user's note
     func pullnotes(parseService: APIService) {
         let accountUrl = APIAdapter.api.getAccountNotesLink(self.username)
         print("api service is from \(NSStringFromClass(Note)) url is: \(accountUrl) " )
         parseService.getResponse(NSStringFromClass(Note), url: accountUrl)
     }
-    
+
+    override var description: String {
+        return "username: \(username), uid: \(uid)  modified: \(modified_at) username: \(username) state: \(state)"
+    }
+
 }

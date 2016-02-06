@@ -8,6 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		965C31351C63193A00CA21D0 /* AccountSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965C31311C63170F00CA21D0 /* AccountSpec.swift */; };
+		968D28AA1C647274006EDAB2 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 968D28A91C647274006EDAB2 /* Cartfile */; };
+		968D28AD1C647406006EDAB2 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 968D28AB1C647406006EDAB2 /* Alamofire.framework */; };
+		968D28AE1C647406006EDAB2 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 968D28AC1C647406006EDAB2 /* SwiftyJSON.framework */; };
+		968D28B01C647420006EDAB2 /* Alamofire.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 968D28AB1C647406006EDAB2 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		968D28B11C647420006EDAB2 /* SwiftyJSON.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 968D28AC1C647406006EDAB2 /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		96A508C91C655CD400DBBDE3 /* libCloudinary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FCD317EE1A892476003FC954 /* libCloudinary.a */; };
+		96A508CB1C65822500DBBDE3 /* NNUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A508CA1C65822500DBBDE3 /* NNUser.swift */; };
+		96A508D11C65BD4E00DBBDE3 /* Dispatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A508D01C65BD4E00DBBDE3 /* Dispatch.swift */; };
 		96E359901C644BA700580157 /* UserSignInSignOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E3598F1C644BA700580157 /* UserSignInSignOut.swift */; };
 		96E359971C644C3700580157 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96EBD4301C62E6F400BA3737 /* Nimble.framework */; };
 		96E359981C644C3700580157 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96EBD4311C62E6F400BA3737 /* Quick.framework */; };
@@ -64,7 +72,6 @@
 		FCC386A11B03C037004A96AE /* DesignIdeasTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC386A01B03C037004A96AE /* DesignIdeasTableViewController.swift */; };
 		FCC386A31B03DB66004A96AE /* DesignIdeaDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC386A21B03DB66004A96AE /* DesignIdeaDetailTableViewController.swift */; };
 		FCD317DA1A887473003FC954 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCD317D91A887473003FC954 /* CoreLocation.framework */; };
-		FCD317EF1A892476003FC954 /* libCloudinary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FCD317EE1A892476003FC954 /* libCloudinary.a */; };
 		FCD318031A892E98003FC954 /* Wrappy.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD318021A892E98003FC954 /* Wrappy.m */; };
 		FCE66FAF1A9D121C001E1110 /* LocationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE66FAE1A9D121C001E1110 /* LocationDetailViewController.swift */; };
 		FCE67D811A6F7BC30096D594 /* APIAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE67D801A6F7BC30096D594 /* APIAdapter.swift */; };
@@ -91,6 +98,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		968D28AF1C647417006EDAB2 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				968D28B01C647420006EDAB2 /* Alamofire.framework in CopyFiles */,
+				968D28B11C647420006EDAB2 /* SwiftyJSON.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		96E359991C644C4700580157 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -117,6 +135,11 @@
 
 /* Begin PBXFileReference section */
 		965C31311C63170F00CA21D0 /* AccountSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountSpec.swift; sourceTree = "<group>"; };
+		968D28A91C647274006EDAB2 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
+		968D28AB1C647406006EDAB2 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
+		968D28AC1C647406006EDAB2 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
+		96A508CA1C65822500DBBDE3 /* NNUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NNUser.swift; sourceTree = "<group>"; };
+		96A508D01C65BD4E00DBBDE3 /* Dispatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dispatch.swift; sourceTree = "<group>"; };
 		96E3598D1C644BA700580157 /* NatureNetUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NatureNetUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		96E3598F1C644BA700580157 /* UserSignInSignOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSignInSignOut.swift; sourceTree = "<group>"; };
 		96E359911C644BA700580157 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -205,8 +228,10 @@
 			files = (
 				FCEC985A1A9ACC28007C4ED5 /* MapKit.framework in Frameworks */,
 				FCD317DA1A887473003FC954 /* CoreLocation.framework in Frameworks */,
+				968D28AE1C647406006EDAB2 /* SwiftyJSON.framework in Frameworks */,
 				FC1134CE1A64317F00D548E8 /* CoreData.framework in Frameworks */,
-				FCD317EF1A892476003FC954 /* libCloudinary.a in Frameworks */,
+				968D28AD1C647406006EDAB2 /* Alamofire.framework in Frameworks */,
+				96A508C91C655CD400DBBDE3 /* libCloudinary.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,6 +288,8 @@
 		96EBD42F1C62E6E100BA3737 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				968D28AB1C647406006EDAB2 /* Alamofire.framework */,
+				968D28AC1C647406006EDAB2 /* SwiftyJSON.framework */,
 				FCEC98591A9ACC28007C4ED5 /* MapKit.framework */,
 				FCD317EE1A892476003FC954 /* libCloudinary.a */,
 				FCD317D91A887473003FC954 /* CoreLocation.framework */,
@@ -274,6 +301,7 @@
 		FC1134871A642DD500D548E8 = {
 			isa = PBXGroup;
 			children = (
+				968D28A91C647274006EDAB2 /* Cartfile */,
 				96EBD42F1C62E6E100BA3737 /* Frameworks */,
 				FC1134921A642DD500D548E8 /* Naturenet */,
 				96E3599C1C644E5800580157 /* Testing */,
@@ -372,6 +400,7 @@
 				FC012CC11A76AD9800D9CBF1 /* Context.swift */,
 				FC5BA3881A7859400069D59F /* Media.swift */,
 				FCA005481A832B010066686D /* Feedback.swift */,
+				96A508CA1C65822500DBBDE3 /* NNUser.swift */,
 			);
 			name = DataModel;
 			sourceTree = "<group>";
@@ -385,6 +414,7 @@
 				FC5BA3861A78114B0069D59F /* SwiftCoreDataHelper.swift */,
 				FCFD1B821AE01A2B00BFA138 /* AlertControllerHelper.swift */,
 				FC5F34BE1AF0A04800C42540 /* ImageHelper.swift */,
+				96A508D01C65BD4E00DBBDE3 /* Dispatch.swift */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -452,6 +482,7 @@
 				FC11348C1A642DD500D548E8 /* Sources */,
 				FC11348D1A642DD500D548E8 /* Frameworks */,
 				FC11348E1A642DD500D548E8 /* Resources */,
+				968D28AF1C647417006EDAB2 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -490,7 +521,7 @@
 				LastSwiftMigration = 0710;
 				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0610;
-				ORGANIZATIONNAME = "Jinyue Xia";
+				ORGANIZATIONNAME = "";
 				TargetAttributes = {
 					96E3598C1C644BA700580157 = {
 						CreatedOnToolsVersion = 7.2;
@@ -498,7 +529,7 @@
 					};
 					FC11348F1A642DD500D548E8 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = WN3YQ2PUY2;
+						DevelopmentTeam = 489TM7FGKR;
 					};
 					FC1134A71A642DD600D548E8 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -540,6 +571,7 @@
 			files = (
 				FC1134BB1A642FDC00D548E8 /* Images.xcassets in Resources */,
 				FC1134A31A642DD600D548E8 /* LaunchScreen.xib in Resources */,
+				968D28AA1C647274006EDAB2 /* Cartfile in Resources */,
 				FC67C1581AA16EBE0012B903 /* ConsentTableViewCell.xib in Resources */,
 				FCC3869F1B0314E6004A96AE /* ActivityIconTableViewCell.xib in Resources */,
 				FC5EBE441AB0072D006B02B7 /* LogInTableViewCell.xib in Resources */,
@@ -577,6 +609,7 @@
 				FC012CC21A76AD9800D9CBF1 /* Context.swift in Sources */,
 				FC1134C31A6430D900D548E8 /* NNModel.swift in Sources */,
 				FC6764241A8203F10041B788 /* NoteDescriptionViewController.swift in Sources */,
+				96A508D11C65BD4E00DBBDE3 /* Dispatch.swift in Sources */,
 				FC5C318C1A8CFFA400A59B89 /* ActivitiesTableViewController.swift in Sources */,
 				FCA005471A82D2110066686D /* NoteActivitySelectionViewController.swift in Sources */,
 				FC6764221A81F9620041B788 /* EditObsTableViewCell.swift in Sources */,
@@ -610,6 +643,7 @@
 				FCC386A11B03C037004A96AE /* DesignIdeasTableViewController.swift in Sources */,
 				FC031E581A833E71007F67D7 /* NoteLocationTableViewController.swift in Sources */,
 				FCD318031A892E98003FC954 /* Wrappy.m in Sources */,
+				96A508CB1C65822500DBBDE3 /* NNUser.swift in Sources */,
 				FC1134C81A6430EF00D548E8 /* APIService.swift in Sources */,
 				FC077EA51AD4F1F400F0A1E2 /* BirdCountingCollectionViewCell.swift in Sources */,
 				FC5F34BF1AF0A04800C42540 /* ImageHelper.swift in Sources */,
@@ -777,13 +811,14 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = naturenet/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -804,13 +839,14 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = naturenet/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

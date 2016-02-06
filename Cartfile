@@ -1,3 +1,7 @@
+# Main
+github "Alamofire/Alamofire" ~> 3.0
+github "SwiftyJSON/SwiftyJSON" ~> 2.3
+
 # Test
 github "Quick/Nimble" "v3.0.0"
 github "Quick/Quick" "v0.8.0"

@@ -117,10 +117,9 @@ class Device
 end
 
 # Picks the target device for testing.
-def target_device
+def target_device(min_ios = 8.0)
     devices = Device.load_devices.sort_by { |d| d.os_version }
-    # TODO: Install the iOS 8 SDK so we can test against the minimum supported version
-    target = devices.find { |d| d.available? && d.iphone? && d.os_version >= 9.2 && d.name == 'iPhone 6' }
+    target = devices.find { |d| d.available? && d.iphone? && d.os_version >= min_ios && d.name == 'iPhone 6' }
     abort "could not find a compatible device" unless target
     puts "Using target device: #{target}"
     return target
@@ -135,13 +134,16 @@ task :unit do
 end
 
 task :'ui-test' do
-    XcodeTools.xcodebuild(:test, 'NNUITests', target_device)
+    # ui automation requires the device to be iOS 9.0 or higher
+    XcodeTools.xcodebuild(:test, 'NNUITests', target_device(9.0))
 end
 
 task :clean do
     FileUtils.rm_rf('./build') if File.exists? './build'
-    device = target_device
-    XcodeTools.simctl(:shutdown, device.udid) if device.state == :booted
-    XcodeTools.simctl(:erase, device.udid)
+    devices = [target_device, target_device(9.0)]
+    devices.each do |device|
+        XcodeTools.simctl(:shutdown, device.udid) if device.state == :booted
+        XcodeTools.simctl(:erase, device.udid)
+    end
 end
 
