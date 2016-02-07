@@ -1,3 +1,0 @@
-#!/bin/sh
-xcodebuild build -scheme NatureNet | xcpretty
-xcodebuild test -scheme NatureNet -destination 'platform=iOS Simulator,name=iPhone' | xcpretty
