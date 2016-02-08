@@ -39,8 +39,6 @@ class Account: NNModel {
             username = data["username"] as? String {
                 self.uid = uid
                 self.username = username
-
-                // TODO: remove this if https://github.com/naturenet/naturenet-api/pull/3 is accepted
                 if let
                     name = data["name"] as? String,
                     created_at = data["created_at"] as? NSNumber,
@@ -50,7 +48,7 @@ class Account: NNModel {
                         self.modified_at = modified_at
                     }
         } else {
-            throw ModelErrors.IncompleteData(data: data)
+            throw ModelErrors.IncompleteData(data)
         }
     }
     
@@ -134,7 +132,7 @@ class Account: NNModel {
     }
 
     override var description: String {
-        return "username: \(username), uid: \(uid)  modified: \(modified_at) username: \(username) state: \(state)"
+        return "Account[username: \(username), uid: \(uid)  modified: \(modified_at) name: \(name) state: \(state)]"
     }
 
 }

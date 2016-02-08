@@ -125,17 +125,33 @@ def target_device(min_ios = 8.0)
     return target
 end
 
+# targets are a little unreliable if the simulator is already running
+# and also if it boots while the tests are preparing, so close it and
+# reopen before the tests start
+def ready_device(device)
+    system %Q{osascript -e 'quit app "Simulator"'}
+    system %Q{open -a "Simulator" --args -CurrentDeviceUDID #{device.udid}}
+    puts "Waiting for simulator..."
+    sleep 2
+end
+
 task :test do
-    XcodeTools.xcodebuild(:test, 'NatureNet', target_device)
+    device = target_device
+    ready_device(device)
+    XcodeTools.xcodebuild(:test, 'NatureNet', device)
 end
 
 task :unit do
-    XcodeTools.xcodebuild(:test, 'NNUnitTests', target_device)
+    device = target_device
+    ready_device(device)
+    XcodeTools.xcodebuild(:test, 'NNUnitTests', device)
 end
 
 task :'ui-test' do
     # ui automation requires the device to be iOS 9.0 or higher
-    XcodeTools.xcodebuild(:test, 'NNUITests', target_device(9.0))
+    device = target_device(9.0)
+    ready_device(device)
+    XcodeTools.xcodebuild(:test, 'NNUITests', device)
 end
 
 task :clean do

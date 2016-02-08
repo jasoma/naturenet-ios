@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		96125B0A1C67BDBF002AE6AD /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96125B091C67BDBF002AE6AD /* ArrayExtensions.swift */; };
+		96125B0C1C681DA1002AE6AD /* NNModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96125B0B1C681DA1002AE6AD /* NNModelSpec.swift */; };
+		96125B0E1C682055002AE6AD /* AccountTestExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96125B0D1C682055002AE6AD /* AccountTestExtensions.swift */; };
+		96125B111C68207A002AE6AD /* Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96125B101C68207A002AE6AD /* Random.swift */; };
+		96125B121C68207A002AE6AD /* Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96125B101C68207A002AE6AD /* Random.swift */; };
+		96125B141C682A9F002AE6AD /* IntExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96125B131C682A9F002AE6AD /* IntExtensions.swift */; };
+		96125B171C682D9B002AE6AD /* NNModelTestExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96125B161C682D9B002AE6AD /* NNModelTestExtensions.swift */; };
+		96125B1A1C683033002AE6AD /* NNSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96125B191C683033002AE6AD /* NNSpec.swift */; };
 		965C31351C63193A00CA21D0 /* AccountSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965C31311C63170F00CA21D0 /* AccountSpec.swift */; };
 		968D28AA1C647274006EDAB2 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 968D28A91C647274006EDAB2 /* Cartfile */; };
 		968D28AD1C647406006EDAB2 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 968D28AB1C647406006EDAB2 /* Alamofire.framework */; };
@@ -134,6 +142,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		96125B091C67BDBF002AE6AD /* ArrayExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
+		96125B0B1C681DA1002AE6AD /* NNModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NNModelSpec.swift; sourceTree = "<group>"; };
+		96125B0D1C682055002AE6AD /* AccountTestExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountTestExtensions.swift; sourceTree = "<group>"; };
+		96125B101C68207A002AE6AD /* Random.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Random.swift; sourceTree = "<group>"; };
+		96125B131C682A9F002AE6AD /* IntExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntExtensions.swift; sourceTree = "<group>"; };
+		96125B161C682D9B002AE6AD /* NNModelTestExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NNModelTestExtensions.swift; sourceTree = "<group>"; };
+		96125B191C683033002AE6AD /* NNSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NNSpec.swift; sourceTree = "<group>"; };
 		965C31311C63170F00CA21D0 /* AccountSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountSpec.swift; sourceTree = "<group>"; };
 		968D28A91C647274006EDAB2 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		968D28AB1C647406006EDAB2 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
@@ -250,6 +265,11 @@
 		965C31361C64421400CA21D0 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				96125B0D1C682055002AE6AD /* AccountTestExtensions.swift */,
+				96125B101C68207A002AE6AD /* Random.swift */,
+				96125B131C682A9F002AE6AD /* IntExtensions.swift */,
+				96125B161C682D9B002AE6AD /* NNModelTestExtensions.swift */,
+				96125B191C683033002AE6AD /* NNSpec.swift */,
 			);
 			name = Shared;
 			path = naturenetTests;
@@ -350,6 +370,7 @@
 			children = (
 				FC1134AC1A642DD600D548E8 /* Supporting Files */,
 				965C31311C63170F00CA21D0 /* AccountSpec.swift */,
+				96125B0B1C681DA1002AE6AD /* NNModelSpec.swift */,
 			);
 			name = NaturenetTests;
 			path = naturenetTests;
@@ -415,6 +436,7 @@
 				FCFD1B821AE01A2B00BFA138 /* AlertControllerHelper.swift */,
 				FC5F34BE1AF0A04800C42540 /* ImageHelper.swift */,
 				96A508D01C65BD4E00DBBDE3 /* Dispatch.swift */,
+				96125B091C67BDBF002AE6AD /* ArrayExtensions.swift */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -595,6 +617,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				96E359901C644BA700580157 /* UserSignInSignOut.swift in Sources */,
+				96125B121C68207A002AE6AD /* Random.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -629,6 +652,7 @@
 				FC5EBE431AB0072D006B02B7 /* LogInTableViewCell.swift in Sources */,
 				FCFD1B831AE01A2B00BFA138 /* AlertControllerHelper.swift in Sources */,
 				FCBEE99D1AE89B0D001E70FC /* BirdActivityTableViewController.swift in Sources */,
+				96125B0A1C67BDBF002AE6AD /* ArrayExtensions.swift in Sources */,
 				FC1134BD1A64308D00D548E8 /* SignInViewController.swift in Sources */,
 				FC8007AB1A80902900510E30 /* ProfileTableViewCell.swift in Sources */,
 				FCBEE99A1AE8968A001E70FC /* BirdActivityTableViewCell.swift in Sources */,
@@ -654,7 +678,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96125B141C682A9F002AE6AD /* IntExtensions.swift in Sources */,
+				96125B111C68207A002AE6AD /* Random.swift in Sources */,
+				96125B0C1C681DA1002AE6AD /* NNModelSpec.swift in Sources */,
+				96125B0E1C682055002AE6AD /* AccountTestExtensions.swift in Sources */,
 				965C31351C63193A00CA21D0 /* AccountSpec.swift in Sources */,
+				96125B1A1C683033002AE6AD /* NNSpec.swift in Sources */,
+				96125B171C682D9B002AE6AD /* NNModelTestExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

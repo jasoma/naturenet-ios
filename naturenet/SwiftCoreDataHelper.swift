@@ -11,12 +11,13 @@ import UIKit
 import CoreData
 
 class SwiftCoreDataHelper {
+
     class var nsManagedObjectContext: NSManagedObjectContext {
         let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let context: NSManagedObjectContext = appDelegate.managedObjectContext!
         return context
     }
-    
+
     class func insertManagedObject(className: String, managedObjectConect:NSManagedObjectContext) -> AnyObject {
         let managedObject:NSManagedObject = NSEntityDescription.insertNewObjectForEntityForName(className, inManagedObjectContext: managedObjectConect) 
         

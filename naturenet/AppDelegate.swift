@@ -93,6 +93,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if coordinator == nil {
             return nil
         }
+        // NOTE: This initializer, combined with a lazy variable could potentially open us up to trouble. 
+        //       When initialized this way the object context is not thread safe and can only be accessed by the
+        //       thread/queue that created it. All signs in the app point to this being the main thread since
+        //       however because it is called lazily any change in the app that causes the context to be initialized
+        //       at a different time could crashes or bugs. Taking no action now buy leaving this note here in case
+        //       CoreData is still needed after the API change.
         var managedObjectContext = NSManagedObjectContext()
         managedObjectContext.persistentStoreCoordinator = coordinator
         return managedObjectContext
