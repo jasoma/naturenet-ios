@@ -17,17 +17,21 @@ extension Account {
     /// - parameter save: should the instance be saved, defaults to `true`
     /// - returns: the inserted and saved instance
     static func random(save save: Bool = true) -> Account {
-        let created = NNModel.insert(Account.self)
-        created.uid = Random.int(0...10000)
-        created.username = Random.alphanumeric();
-        created.email = "testuser-\(created.uid)@nature-net.org"
-        created.name = "Test User"
-        created.created_at = Random.int()
-        created.modified_at = Random.int()
-        if save {
-            try! created.save()
+        var account: Account?
+        NNModel.concurrentContext.performBlockAndWait {
+            let created = NNModel.insert(Account.self)
+            created.uid = Random.int(0...10000)
+            created.username = Random.alphanumeric();
+            created.email = "testuser-\(created.uid)@nature-net.org"
+            created.name = "Test User"
+            created.created_at = Random.int()
+            created.modified_at = Random.int()
+            if save {
+                try! created.save()
+            }
+            account = created
         }
-        return created
+        return account!
     }
 
     /// Creates a data dictionary similar to what would be sent from the server with
@@ -45,20 +49,4 @@ extension Account {
             "modified_at": Random.int()
         ]
     }
-
-    /// Converts this instance into a data dictionary similar to what would
-    /// be sent from the server.
-    ///
-    /// - returns: the key value pairs of this account
-    func toDictionary() -> [String: AnyObject] {
-        return [
-            "id": self.uid,
-            "username": self.username,
-            "name": self.name,
-            "email": self.email,
-            "created_at": self.created_at,
-            "modified_at": self.modified_at
-        ]
-    }
-
 }

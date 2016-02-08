@@ -15,12 +15,14 @@ extension NNModel {
 
     /// Deletes all records of the specified type.
     static func deleteAll<T: NSManagedObject>(type: T.Type) {
-        let all = NSFetchRequest(entityName: String(type))
-        let accounts = try! self.context.executeFetchRequest(all)
-        for record in accounts {
-            context.deleteObject(record as! NSManagedObject)
+        concurrentContext.performBlockAndWait {
+            let all = NSFetchRequest(entityName: String(type))
+            let accounts = try! concurrentContext.executeFetchRequest(all)
+            for record in accounts {
+                concurrentContext.deleteObject(record as! NSManagedObject)
+            }
+            try! concurrentContext.save()
         }
-        try! self.context.save()
     }
 
 }

@@ -51,9 +51,11 @@ class NNModelSpec: NNSpec {
 
                 it("should return only the first record") {
                     10.timesWithCount { i in
-                        let account = Account.random()
-                        account.uid = i
-                        try! account.save()
+                        NNModel.concurrentContext.performBlockAndWait {
+                            let account = Account.random()
+                            account.uid = i
+                            try! account.save()
+                        }
                     }
                     let done = self.asyncLatch()
                     NNModel.findFirst(Account.self, matching: NSPredicate(value: true), orderBy: NSSortDescriptor(key: "uid", ascending: true)) { result, error in
@@ -102,9 +104,11 @@ class NNModelSpec: NNSpec {
 
                 it("should return an error if there are too many matches") {
                     3.times {
-                        let account = Account.random()
-                        account.username = "duplicate"
-                        try! account.save()
+                        NNModel.concurrentContext.performBlockAndWait {
+                            let account = Account.random()
+                            account.username = "duplicate"
+                            try! account.save()
+                        }
                     }
                     let done = self.asyncLatch()
                     NNModel.findOne(Account.self, matching: NSPredicate(format: "username == 'duplicate'")) { result, error in
@@ -147,9 +151,11 @@ class NNModelSpec: NNSpec {
 
                 it("should return an error if there are too many matches") {
                     2.times {
-                        let account = Account.random()
-                        account.username = "duplicate"
-                        try! account.save()
+                        NNModel.concurrentContext.performBlockAndWait {
+                            let account = Account.random()
+                            account.username = "duplicate"
+                            try! account.save()
+                        }
                     }
                     let done = self.asyncLatch()
                     NNModel.findOrInsert(Account.self, matching: NSPredicate(format: "username == 'duplicate'")) { result, error in

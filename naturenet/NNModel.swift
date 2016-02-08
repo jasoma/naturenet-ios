@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 import CoreData
 
 /// Collection of errors that can occur when dealing with models locally
@@ -17,12 +18,18 @@ enum ModelErrors: ErrorType {
     /// that was used to attempt a creation.
     case IncompleteData(NSDictionary)
 
+    /// The response from the server was not what the model expected.
+    case CouldNotReadResponse(AnyObject)
+
     /// Too many matching records were found during an `NNModel.findOne` call. All matching
     /// records are attached.
     case NoUniqueRecord([NNModel])
 
     /// A save was attempted on an instance that was not linked to any context.
     case NoAssociatedContext
+
+    /// Device has no internet access
+    case NotConnected
 }
 
 class NNModel: NSManagedObject {
@@ -31,10 +38,15 @@ class NNModel: NSManagedObject {
     @NSManaged var modified_at: NSNumber
     @NSManaged var state: NSNumber
 
-    /// The default core data context for the application.
-    static var context: NSManagedObjectContext {
-        return SwiftCoreDataHelper.nsManagedObjectContext
-    }
+    /// A singleton context suitable for use from multiple threads. Operations on
+    /// the context must be dont from within `context.performBlock`.
+    static var concurrentContext: NSManagedObjectContext = {
+        let app = UIApplication.sharedApplication().delegate as! AppDelegate
+        let context = NSManagedObjectContext(concurrencyType: .PrivateQueueConcurrencyType)
+        context.persistentStoreCoordinator = app.persistentStoreCoordinator
+        return context
+
+    }()
 
     struct STATE {
         static let NEW = 1
@@ -169,16 +181,15 @@ class NNModel: NSManagedObject {
 
     /// Inserts a new instance of a model into the context but does not save it.
     ///
-    /// - parameters type: the type of model to insert.
+    /// - parameter type: the type of model to insert.
     /// - returns: the newly created and inserted instance.
-    static func insert<T: NNModel>(type: T.Type) -> T {
-        return NSEntityDescription.insertNewObjectForEntityForName(String(type), inManagedObjectContext: context) as! T
+    class func insert<T: NNModel>(type: T.Type) -> T {
+        var model: T?
+        concurrentContext.performBlockAndWait {
+            model = NSEntityDescription.insertNewObjectForEntityForName(String(type), inManagedObjectContext: concurrentContext) as? T
+        }
+        return model!
     }
-
-    /// TODO: The find function below should be executed via `context.performBlock` so that they are not sensitive
-    ///       to which thread is calling them. However that would required changes in how the context is created,
-    ///       see the note in `AppContext#managedObjectContext` for more details. For now ensure all these methods
-    ///       are always called on the main thread.
 
     /// Attempts to find a single instance of the type specified by the predicate, if no matches are found a new instance
     /// will be created and inserted into the context. The handler is passed the found or created instance or with any 
@@ -191,18 +202,24 @@ class NNModel: NSManagedObject {
     /// - parameter handler: the handler block for the results, if no values match both arguments to the handler will be nil,
     ///                      otherwise it is guaranteed that only one of the arguments will be non-nil
     /// - SeeAlso: `findOne`
-    static func findOrInsert<T: NNModel>(type: T.Type, matching predicate: NSPredicate, queue: Dispatch = .Background, handler: (T?, ErrorType?) -> ()) {
-        // need to ensure the initial callback is on Main incase we need to perform an insert.
-        findOne(type, matching: predicate, queue: .Main) { result, error in
-            if error != nil {
+    class func findOrInsert<T: NNModel>(type: T.Type, matching predicate: NSPredicate, queue: Dispatch = .Background, handler: (T?, ErrorType?) -> ()) {
+        concurrentContext.performBlock {
+            do {
+                let request = NSFetchRequest(entityName: String(type))
+                request.predicate = predicate
+                let result = try concurrentContext.executeFetchRequest(request)
+                let models = nonnil(result.map({ $0 as? T }))
+                if models.count > 1 {
+                    queue ~> { handler(nil, ModelErrors.NoUniqueRecord(models)) }
+                }
+                else if models.count == 1 {
+                    queue ~> { handler(models.first, nil) }
+                } else {
+                    let inserted = NNModel.insert(type)
+                    queue ~> { handler(inserted, nil) }
+                }
+            } catch {
                 queue ~> { handler(nil, error) }
-            }
-            else if result != nil {
-                queue ~> { handler(result, nil) }
-            }
-            else {
-                let inserted = insert(type)
-                queue ~> { handler(inserted, nil) }
             }
         }
     }
@@ -217,7 +234,7 @@ class NNModel: NSManagedObject {
     /// - parameter handler: the handler block for the results, if no values match both arguments to the handler will be nil,
     ///                      otherwise it is guaranteed that only one of the arguments will be non-nil
     /// - SeeAlso: `findFirst`
-    static func findOne<T: NNModel>(type: T.Type, matching predicate: NSPredicate, queue: Dispatch = .Background, handler: (T?, ErrorType?) -> ()) {
+    class func findOne<T: NNModel>(type: T.Type, matching predicate: NSPredicate, queue: Dispatch = .Background, handler: (T?, ErrorType?) -> ()) {
         find(type, matching: predicate, queue: queue) { results, error in
             if error != nil {
                 handler(nil, error)
@@ -242,7 +259,7 @@ class NNModel: NSManagedObject {
     /// - parameter queue: which queue to execute the handler on, defaults to `Background`
     /// - parameter handler: the handler block for the results, if no values match both arguments to the handler will be nil,
     ///                      otherwise it is guaranteed that only one of the arguments will be non-nil
-    static func findFirst<T: NNModel>(type: T.Type, matching predicate: NSPredicate, orderBy: NSSortDescriptor? = nil, queue: Dispatch = .Background, handler: (T?, ErrorType?) -> ()) {
+    class func findFirst<T: NNModel>(type: T.Type, matching predicate: NSPredicate, orderBy: NSSortDescriptor? = nil, queue: Dispatch = .Background, handler: (T?, ErrorType?) -> ()) {
         let request = NSFetchRequest(entityName: String(type))
         request.predicate = predicate
         request.fetchLimit = 1
@@ -268,7 +285,7 @@ class NNModel: NSManagedObject {
     /// - parameter queue: which queue to execute the handler on, defaults to `Background`
     /// - parameter handler: the handler block for the results, it is guaranteed that only one of the arguments
     ///                      will be non-nil.
-    static func find<T: NNModel>(type: T.Type, matching predicate: NSPredicate, queue: Dispatch = .Background, handler: ([T]?, ErrorType?) -> ()) {
+    class func find<T: NNModel>(type: T.Type, matching predicate: NSPredicate, queue: Dispatch = .Background, handler: ([T]?, ErrorType?) -> ()) {
         let request = NSFetchRequest(entityName: String(type))
         request.predicate = predicate
         find(type, request: request, queue: queue, handler: handler)
@@ -283,14 +300,15 @@ class NNModel: NSManagedObject {
     /// - parameter queue: which queue to execute the handler on, defaults to `Background`
     /// - parameter handler: the handler block for the results, it is guaranteed that only one of the arguments
     //                       will be non-nil.
-    static func find<T: NNModel>(type: T.Type, request: NSFetchRequest, queue: Dispatch = .Background, handler: ([T]?, ErrorType?) -> ()) {
-        /// TODO: use `context.performBlock:`
-        do {
-            let result = try context.executeFetchRequest(request)
-            let models = nonnil(result.map({ $0 as? T }))
-            queue ~> { handler(models, nil) }
-        } catch {
-            queue ~> { handler(nil, error) }
+    class func find<T: NNModel>(type: T.Type, request: NSFetchRequest, queue: Dispatch = .Background, handler: ([T]?, ErrorType?) -> ()) {
+        concurrentContext.performBlock {
+            do {
+                let result = try concurrentContext.executeFetchRequest(request)
+                let models = nonnil(result.map({ $0 as? T }))
+                queue ~> { handler(models, nil) }
+            } catch {
+                queue ~> { handler(nil, error) }
+            }
         }
     }
 }
