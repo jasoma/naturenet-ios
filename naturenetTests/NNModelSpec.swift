@@ -28,21 +28,23 @@ class NNModelSpec: NNSpec {
                 it("should return all matching records") {
                     let done = self.asyncLatch()
                     10.times { Account.random() }
-                    NNModel.find(Account.self, request: NSFetchRequest(entityName: String(Account))) { results, error in
-                        expect(error).to(beNil())
-                        expect(results?.count).to(equal(10))
-                        done.fulfill()
-                    }
+                    NNModel.find(Account.self, request: NSFetchRequest(entityName: String(Account)))
+                        .then({ results in
+                            expect(results.count).to(equal(10))
+                            done.fulfill()
+                        })
+                        .error { fail("\($0)") }
                     self.waitDone()
                 }
 
                 it("should return an empty array if there are no matches") {
                     let done = self.asyncLatch()
-                    NNModel.find(Account.self, matching: NSPredicate(format: "username = %@", "Nobody")) { results, error in
-                        expect(error).to(beNil())
-                        expect(results!).to(beEmpty())
-                        done.fulfill()
-                    }
+                    NNModel.find(Account.self, matching: NSPredicate(format: "username = %@", "Nobody"))
+                        .then({ results in
+                            expect(results).to(beEmpty())
+                            done.fulfill()
+                        })
+                        .error { fail("\($0)") }
                     self.waitDone()
                 }
             }
@@ -58,21 +60,23 @@ class NNModelSpec: NNSpec {
                         }
                     }
                     let done = self.asyncLatch()
-                    NNModel.findFirst(Account.self, matching: NSPredicate(value: true), orderBy: NSSortDescriptor(key: "uid", ascending: true)) { result, error in
-                        expect(error).to(beNil())
-                        expect(result?.uid).to(equal(1))
-                        done.fulfill()
-                    }
+                    NNModel.findFirst(Account.self, matching: NSPredicate(value: true), orderBy: NSSortDescriptor(key: "uid", ascending: true))
+                        .then({ result in
+                            expect(result?.uid).to(equal(1))
+                            done.fulfill()
+                        })
+                        .error { fail("\($0)") }
                     self.waitDone()
                 }
 
                 it("should return nil if there are no matches") {
                     let done = self.asyncLatch()
-                    NNModel.findFirst(Account.self, matching: NSPredicate(format: "uid > 10")) { result, error in
-                        expect(error).to(beNil())
-                        expect(result).to(beNil())
-                        done.fulfill()
-                    }
+                    NNModel.findFirst(Account.self, matching: NSPredicate(format: "uid > 10"))
+                        .then({ result in
+                            expect(result).to(beNil())
+                            done.fulfill()
+                        })
+                        .error { fail("\($0)") }
                     self.waitDone()
                 }
             }
@@ -84,21 +88,23 @@ class NNModelSpec: NNSpec {
                     account.username = "test"
                     try! account.save()
                     let done = self.asyncLatch()
-                    NNModel.findOne(Account.self, matching: NSPredicate(format: "username == 'test'")) { result, error in
-                        expect(error).to(beNil())
-                        expect(result?.username).to(equal("test"))
-                        done.fulfill()
-                    }
+                    NNModel.findOne(Account.self, matching: NSPredicate(format: "username == 'test'"))
+                        .then({ result in
+                            expect(result?.username).to(equal("test"))
+                            done.fulfill()
+                        })
+                        .error { fail("\($0)") }
                     self.waitDone()
                 }
 
                 it("should return nil if there are no matched") {
                     let done = self.asyncLatch()
-                    NNModel.findOne(Account.self, matching: NSPredicate(format: "username == 'notausername'")) { result, error in
-                        expect(error).to(beNil())
-                        expect(result).to(beNil())
-                        done.fulfill()
-                    }
+                    NNModel.findOne(Account.self, matching: NSPredicate(format: "username == 'notausername'"))
+                        .then({ result in
+                            expect(result).to(beNil())
+                            done.fulfill()
+                        })
+                        .error { fail("\($0)") }
                     self.waitDone()
                 }
 
@@ -111,16 +117,17 @@ class NNModelSpec: NNSpec {
                         }
                     }
                     let done = self.asyncLatch()
-                    NNModel.findOne(Account.self, matching: NSPredicate(format: "username == 'duplicate'")) { result, error in
-                        expect(result).to(beNil())
-                        switch error as! ModelErrors {
-                        case ModelErrors.NoUniqueRecord(let found):
-                            expect(found.count).to(equal(3))
-                        default:
-                            fail("incorrect error: \(error)")
-                        }
-                        done.fulfill()
-                    }
+                    NNModel.findOne(Account.self, matching: NSPredicate(format: "username == 'duplicate'"))
+                        .then({ fail("\($0)") })
+                        .error({error in
+                            switch error {
+                            case ModelErrors.NoUniqueRecord(let found):
+                                expect(found.count).to(equal(3))
+                            default:
+                                fail("incorrect error: \(error)")
+                            }
+                            done.fulfill()
+                        })
                     self.waitDone()
                 }
             }
@@ -130,22 +137,24 @@ class NNModelSpec: NNSpec {
                 it("should return the only record if it exists") {
                     let account = Account.random()
                     let done = self.asyncLatch()
-                    NNModel.findOrInsert(Account.self, matching: NSPredicate(format: "username == %@", account.username)) { result, error in
-                        expect(error).to(beNil())
-                        expect(result!.username).to(equal(account.username))
-                        expect(result!.inserted).to(beFalse())
-                        done.fulfill()
-                    }
+                    NNModel.findOrInsert(Account.self, matching: NSPredicate(format: "username == %@", account.username))
+                        .then({ result in
+                            expect(result.username).to(equal(account.username))
+                            expect(result.inserted).to(beFalse())
+                            done.fulfill()
+                        })
+                        .error({ fail("\($0)") })
                     self.waitDone()
                 }
 
                 it("should return a new instance if there are no matches") {
                     let done = self.asyncLatch()
-                    NNModel.findOrInsert(Account.self, matching: NSPredicate(format: "username == 'notausername'")) { result, error in
-                        expect(error).to(beNil())
-                        expect(result!.inserted).to(beTrue())
-                        done.fulfill()
-                    }
+                    NNModel.findOrInsert(Account.self, matching: NSPredicate(format: "username == 'notausername'"))
+                        .then({ result in
+                            expect(result.inserted).to(beTrue())
+                            done.fulfill()
+                        })
+                        .error({ fail("\($0)") })
                     self.waitDone()
                 }
 
@@ -158,21 +167,20 @@ class NNModelSpec: NNSpec {
                         }
                     }
                     let done = self.asyncLatch()
-                    NNModel.findOrInsert(Account.self, matching: NSPredicate(format: "username == 'duplicate'")) { result, error in
-                        expect(result).to(beNil())
-                        switch error as! ModelErrors {
-                        case ModelErrors.NoUniqueRecord(let found):
-                            expect(found.count).to(equal(2))
-                        default:
-                            fail("incorrect error: \(error)")
-                        }
-                        done.fulfill()
-                    }
+                    NNModel.findOrInsert(Account.self, matching: NSPredicate(format: "username == 'duplicate'"))
+                        .then({ fail("\($0)") })
+                        .error({error in
+                            switch error {
+                            case ModelErrors.NoUniqueRecord(let found):
+                                expect(found.count).to(equal(2))
+                            default:
+                                fail("incorrect error: \(error)")
+                            }
+                            done.fulfill()
+                        })
                     self.waitDone()
                 }
             }
-
         }
-
     }
 }

@@ -9,28 +9,7 @@
 import Foundation
 import UIKit
 import CoreData
-
-/// Collection of errors that can occur when dealing with models locally
-/// or with response from the server.
-enum ModelErrors: ErrorType {
-
-    /// Not enough data is present to create a model instance. Contains the dictionary
-    /// that was used to attempt a creation.
-    case IncompleteData(NSDictionary)
-
-    /// The response from the server was not what the model expected.
-    case CouldNotReadResponse(AnyObject)
-
-    /// Too many matching records were found during an `NNModel.findOne` call. All matching
-    /// records are attached.
-    case NoUniqueRecord([NNModel])
-
-    /// A save was attempted on an instance that was not linked to any context.
-    case NoAssociatedContext
-
-    /// Device has no internet access
-    case NotConnected
-}
+import PromiseKit
 
 class NNModel: NSManagedObject {
     @NSManaged var uid: NSNumber
@@ -179,6 +158,48 @@ class NNModel: NSManagedObject {
     
     func doCommitChildren() {}
 
+    /// Deletes all records matching a predicate.
+    ///
+    /// - parameter type: the type of model to delete.
+    /// - parameter matching: the conditions of the search.
+    /// - returns: a promise wrapping the operation.
+    class func delete<T: NNModel>(type: T.Type, matching predicate: NSPredicate) -> Promise<Int> {
+        return Promise { fulfil, reject in
+            concurrentContext.performBlock {
+                let request = NSFetchRequest(entityName: String(type))
+                request.predicate = predicate
+                do {
+                    let results = try concurrentContext.executeFetchRequest(request)
+                    var deleted = 0
+                    if results.count > 0 {
+                        for obj in results {
+                            concurrentContext.deleteObject(obj as! NNModel)
+                        }
+                        try concurrentContext.save()
+                        deleted = results.count
+                    }
+                    fulfil(deleted)
+                } catch {
+                    reject(error)
+                }
+            }
+        }
+    }
+
+    /// Deletes all records matching a predicate. The handler will be called back with the number of records deleted.
+    /// The hanlder will be invoked asynchronously.
+    ///
+    /// - parameter type: the type of model to delete.
+    /// - parameter matching: the conditions of the search.
+    /// - parameter queue: which queue to execute the handler on, defaults to `Background`
+    /// - parameter handler: the handler block for the results, it is guaranteed that only one of the arguments will
+    ///                      be non-nil.
+    class func delete<T: NNModel>(type: T.Type, matching predicate: NSPredicate, queue: Dispatch = .Background, handler: (Int?, ErrorType?) -> ()) {
+        delete(type, matching: predicate)
+            .then(on: queue, { handler($0, nil) })
+            .error(on: queue, { handler(nil, $0) })
+    }
+
     /// Inserts a new instance of a model into the context but does not save it.
     ///
     /// - parameter type: the type of model to insert.
@@ -189,6 +210,36 @@ class NNModel: NSManagedObject {
             model = NSEntityDescription.insertNewObjectForEntityForName(String(type), inManagedObjectContext: concurrentContext) as? T
         }
         return model!
+    }
+
+    /// Attempts to find a single instance of the type specified by the predicate, if no matches are found a new instance
+    /// will be created and inserted into the context. Will return an error if more then one instance was found
+    ///
+    /// - parameter type: the type of the model to fetch.
+    /// - parameter matching: the conditions of the search.
+    /// - returns: a promise wrapping the operation.
+    /// - SeeAlso: `findOne`
+    class func findOrInsert<T: NNModel>(type: T.Type, matching predicate: NSPredicate) -> Promise<T> {
+        return Promise { fulfil, reject in
+            concurrentContext.performBlock {
+                do {
+                    let request = NSFetchRequest(entityName: String(type))
+                    request.predicate = predicate
+                    let result = try concurrentContext.executeFetchRequest(request)
+                    let models = nonnil(result.map({ $0 as? T }))
+                    if models.count > 1 {
+                        reject(ModelErrors.NoUniqueRecord(models))
+                    }
+                    else if models.count == 1 {
+                        fulfil(models.first!)
+                    } else {
+                        fulfil(insert(type))
+                    }
+                } catch {
+                    reject(error)
+                }
+            }
+        }
     }
 
     /// Attempts to find a single instance of the type specified by the predicate, if no matches are found a new instance
@@ -203,25 +254,29 @@ class NNModel: NSManagedObject {
     ///                      otherwise it is guaranteed that only one of the arguments will be non-nil
     /// - SeeAlso: `findOne`
     class func findOrInsert<T: NNModel>(type: T.Type, matching predicate: NSPredicate, queue: Dispatch = .Background, handler: (T?, ErrorType?) -> ()) {
-        concurrentContext.performBlock {
-            do {
-                let request = NSFetchRequest(entityName: String(type))
-                request.predicate = predicate
-                let result = try concurrentContext.executeFetchRequest(request)
-                let models = nonnil(result.map({ $0 as? T }))
-                if models.count > 1 {
-                    queue ~> { handler(nil, ModelErrors.NoUniqueRecord(models)) }
+        findOrInsert(type, matching: predicate)
+            .then(on: queue, { handler($0, nil) })
+            .error(on: queue, { handler(nil, $0) })
+    }
+
+
+    /// Find a single instance of the type specified by the predicate. Will return an error if more then one instance
+    /// was found.
+    ///
+    /// - parameter type: the type of the model to fetch.
+    /// - parameter matching: the conditions of the search.
+    /// - returns: a promise wrapping the operation.
+    /// - SeeAlso: `findFirst`
+    class func findOne<T: NNModel>(type: T.Type, matching predicate: NSPredicate) -> Promise<T?> {
+        return find(type, matching: predicate)
+            .then(on: .Background, { results -> T? in
+                if results.count > 1 {
+                    throw ModelErrors.NoUniqueRecord(results)
                 }
-                else if models.count == 1 {
-                    queue ~> { handler(models.first, nil) }
-                } else {
-                    let inserted = NNModel.insert(type)
-                    queue ~> { handler(inserted, nil) }
+                else {
+                    return results.first
                 }
-            } catch {
-                queue ~> { handler(nil, error) }
-            }
-        }
+            })
     }
 
     /// Find a single instance of the type specified by the predicate and invokes the handler block with the
@@ -235,17 +290,27 @@ class NNModel: NSManagedObject {
     ///                      otherwise it is guaranteed that only one of the arguments will be non-nil
     /// - SeeAlso: `findFirst`
     class func findOne<T: NNModel>(type: T.Type, matching predicate: NSPredicate, queue: Dispatch = .Background, handler: (T?, ErrorType?) -> ()) {
-        find(type, matching: predicate, queue: queue) { results, error in
-            if error != nil {
-                handler(nil, error)
-            }
-            else if results?.count > 1 {
-                handler(nil, ModelErrors.NoUniqueRecord(results!))
-            }
-            else {
-                handler(results?.first, nil)
-            }
+        findOne(type, matching: predicate)
+            .then(on: queue, { handler($0, nil) })
+            .error(on: queue, { handler(nil, $0) })
+    }
+
+    /// Find a single instance of the type specified by the predicate. If there is more then one match only the first
+    /// will be returned determined by the sort descriptor if present or by the natural ordering of the store if not.
+    ///
+    /// - parameter type: the type of the model to fetch.
+    /// - parameter matching: the conditions of the search.
+    /// - parameter orderBy: the ordering to perform the search with.
+    /// - returns: a promise wrapping the operation.
+    ///                      otherwise it is guaranteed that only one of the arguments will be non-nil
+    class func findFirst<T: NNModel>(type: T.Type, matching predicate: NSPredicate, orderBy: NSSortDescriptor? = nil) -> Promise<T?> {
+        let request = NSFetchRequest(entityName: String(type))
+        request.predicate = predicate
+        request.fetchLimit = 1
+        if let sorter = orderBy {
+            request.sortDescriptors = [sorter]
         }
+        return find(type, request: request).then(on: .Background) { $0.first }
     }
 
     /// Find a single instance of the type specified by the predicate and invokes the handler block with the
@@ -260,20 +325,20 @@ class NNModel: NSManagedObject {
     /// - parameter handler: the handler block for the results, if no values match both arguments to the handler will be nil,
     ///                      otherwise it is guaranteed that only one of the arguments will be non-nil
     class func findFirst<T: NNModel>(type: T.Type, matching predicate: NSPredicate, orderBy: NSSortDescriptor? = nil, queue: Dispatch = .Background, handler: (T?, ErrorType?) -> ()) {
+        findFirst(type, matching: predicate, orderBy: orderBy)
+            .then(on: queue, { handler($0, nil) })
+            .error(on: queue, { handler(nil, $0) })
+    }
+
+    /// Finds all instances of the type that are present in the object context as specified by a predicate.
+    ///
+    /// - parameter type: the type of the model to fetch.
+    /// - parameter matching: the conditions of the search.
+    /// - returns: a promise wrapping the operation.
+    class func find<T: NNModel>(type: T.Type, matching predicate: NSPredicate) -> Promise<[T]> {
         let request = NSFetchRequest(entityName: String(type))
         request.predicate = predicate
-        request.fetchLimit = 1
-        if let sorter = orderBy {
-            request.sortDescriptors = [sorter]
-        }
-        find(type, request: request, queue: queue) { results, error in
-            if error != nil {
-                handler(nil, error)
-            }
-            else {
-                handler(results?.first, nil)
-            }
-        }
+        return find(type, request: request)
     }
 
     /// Finds all instances of the type that are present in the object context as specified by a predicate and
@@ -286,9 +351,28 @@ class NNModel: NSManagedObject {
     /// - parameter handler: the handler block for the results, it is guaranteed that only one of the arguments
     ///                      will be non-nil.
     class func find<T: NNModel>(type: T.Type, matching predicate: NSPredicate, queue: Dispatch = .Background, handler: ([T]?, ErrorType?) -> ()) {
-        let request = NSFetchRequest(entityName: String(type))
-        request.predicate = predicate
-        find(type, request: request, queue: queue, handler: handler)
+        find(type, matching: predicate)
+            .then(on: queue, { handler($0, nil) })
+            .error(on: queue, { handler(nil, $0) })
+    }
+
+    /// Finds all instances of the type that are present in the object context as specified by the request.
+    ///
+    /// - parameter type: the type of the model to fetch.
+    /// - parameter request: the fetch request to execute.
+    /// - returns: a promise wrapping the operation.
+    class func find<T: NNModel>(type: T.Type, request: NSFetchRequest) -> Promise<[T]> {
+        return Promise { fulfil, reject in
+            concurrentContext.performBlock {
+                do {
+                    let result = try concurrentContext.executeFetchRequest(request)
+                    let models = nonnil(result.map({ $0 as? T }))
+                    fulfil(models)
+                } catch {
+                    reject(error)
+                }
+            }
+        }
     }
 
     /// Finds all instances of the type that are present in the object context as specified by the request and 
@@ -301,15 +385,9 @@ class NNModel: NSManagedObject {
     /// - parameter handler: the handler block for the results, it is guaranteed that only one of the arguments
     //                       will be non-nil.
     class func find<T: NNModel>(type: T.Type, request: NSFetchRequest, queue: Dispatch = .Background, handler: ([T]?, ErrorType?) -> ()) {
-        concurrentContext.performBlock {
-            do {
-                let result = try concurrentContext.executeFetchRequest(request)
-                let models = nonnil(result.map({ $0 as? T }))
-                queue ~> { handler(models, nil) }
-            } catch {
-                queue ~> { handler(nil, error) }
-            }
-        }
+        find(type, request: request)
+            .then(on: queue, { handler($0, nil) })
+            .error(on: queue, { handler(nil, $0) })
     }
 }
 
